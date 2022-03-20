@@ -27,3 +27,28 @@ class Neighbourhood(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def create_hood(self):
+        self.save()
+
+    @classmethod
+    def delete_hood(cls, id):
+        cls.objects.filter(id=id).delete()
+
+    @classmethod
+    def search_by_name(cls, search_term):
+        hood = cls.objects.filter(name__icontains=search_term)
+        return hood
+
+    @classmethod
+    def find_hood(cls, id):
+        hood = cls.objects.get(id=id)
+        return hood
+
+    @classmethod
+    def update_hood(cls, id):
+        cls.objects.filter(id=id).update()
+
+    @classmethod
+    def update_occupants(cls, occupants_count):
+        cls.objects.filter(occupants_count=occupants_count).update()
