@@ -20,3 +20,13 @@ class BusinessTestClass(TestCase):
         self.business.delete_business()
         businesses = Business.objects.all()
         self.assertTrue(len(businesses) == 0)
+        
+        
+class LocationTestClass(TestCase):
+    def setUp(self):
+        self.location = Location(name='Moringa School')
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.location, Location))
+
+    
