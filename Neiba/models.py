@@ -125,3 +125,19 @@ class Post(models.Model):
 
     def update_post(self):
         self.update()
+        
+    @classmethod
+    def search_by_name(cls, search_term):
+        posts = cls.objects.filter(name__icontains=search_term)
+        return posts
+
+    @classmethod
+    def find_post(cls, id):
+        post = cls.objects.get(id=id)
+        return post
+
+    class Meta:
+        ordering = ['-date_created']
+
+    def _str_(self):
+        return self.name
