@@ -95,3 +95,16 @@ class Business(models.Model):
 
     def delete_business(self):
         self.delete()
+        
+    @classmethod
+    def search_by_name(cls, search_term):
+        business = cls.objects.filter(name__icontains=search_term)
+        return business
+
+    @classmethod
+    def find_business(cls, id):
+        business = cls.objects.get(id=id)
+        return business
+
+    def __str__(self):
+        return self.name
