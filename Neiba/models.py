@@ -52,3 +52,17 @@ class Neighbourhood(models.Model):
     @classmethod
     def update_occupants(cls, occupants_count):
         cls.objects.filter(occupants_count=occupants_count).update()
+        
+class Profile(models.Model):
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name='profile', null=True)
+    photo = models.ImageField(upload_to = 'media/', null = True, blank = True)
+    bio = models.TextField(max_length=200)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
+    hood = models.ForeignKey(Neighbourhood, on_delete=models.SET_NULL,
+                             null=True, related_name='members', blank=True)
+    contact = models.CharField(max_length=100)
+    created_on = models.DateTimeField(auto_now_add=True, null=True)
+
+    def __str__(self):
+        return f'{self.user.username} profile'
