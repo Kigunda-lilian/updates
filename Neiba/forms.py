@@ -24,4 +24,9 @@ class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
         fields = ['name', 'email', 'about', 'location', 'hood']
+        
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        exclude = ('user', 'location')
 
