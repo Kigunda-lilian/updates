@@ -116,3 +116,12 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
+    
+    def create_post(self):
+            self.save()
+
+    def delete_post(self):
+        self.delete()
+
+    def update_post(self):
+        self.update()
