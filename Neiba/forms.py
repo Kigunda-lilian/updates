@@ -12,3 +12,9 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['photo', 'bio', 'contact', 'location', 'hood']
+        
+class NeighbourhoodForm(forms.ModelForm):
+    class Meta:
+        model = Neighbourhood
+        fields = ['name', 'photo', 'about',
+                  'location', 'cop_dail', 'health_dail']
