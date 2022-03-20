@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 import datetime as dt
 from PIL import Image
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 
 # Create your models here.
@@ -66,3 +68,21 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} profile'
+    
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+
+    @receiver(post_save, sender=User)
+    def save_user_profile(sender, instance, **kwargs):
+        instance.profile.save()
+        
+class Business(models.Model):
+    name = models.CharField(max_length=20)
+    email = models.EmailField(max_length=30)
+    about = models.TextField(blank=True, null=True)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)
