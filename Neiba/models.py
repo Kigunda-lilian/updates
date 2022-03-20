@@ -86,3 +86,12 @@ class Business(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     hood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
+    
+    def create_business(self):
+        self.save()
+
+    def update_business(self):
+        self.update()
+
+    def delete_business(self):
+        self.delete()
