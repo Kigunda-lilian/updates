@@ -108,3 +108,11 @@ class Business(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Post(models.Model):
+    name = models.CharField(max_length=50)
+    about = models.TextField(max_length=800, blank=True, null=True)
+    photo = models.ImageField(upload_to = 'media/', null = True, blank = True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)
