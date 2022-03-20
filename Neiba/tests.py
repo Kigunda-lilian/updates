@@ -39,3 +39,10 @@ class LocationTestClass(TestCase):
         self.location.delete()
         locations = Location.objects.all()
         self.assertTrue(len(locations) == 0)
+        
+class PostTestClass(TestCase):
+    def setUp(self):
+        self.post = Post(title='First Post')
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.post, Post))
