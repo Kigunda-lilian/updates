@@ -1,0 +1,43 @@
+{%extends 'main/base.html'%}
+{% load bootstrap5 %}
+{% load static%}
+{% block content%}
+<br>
+<style>
+    form {
+        border: 2px solid black;
+        border-radius: 10%;
+        padding: 5%;
+        background: linear-gradient(to top, #f0ea9c, #f05c48);
+        filter: drop-shadow(2px 4px 8px #585858);
+    }
+
+    form:hover {
+        filter: drop-shadow(2px 4px 8px #fff);
+    }
+
+    .con {
+        margin-bottom: 5%;
+    }
+</style>
+<div class="container con">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="prof-body">
+                <form action="{% url 'create_neighbourhood'%}" method="post" enctype="multipart/form-data">
+
+                    {% load crispy_forms_tags %}
+                    {{ hood_form | crispy }}
+                    {% csrf_token %}
+                    <div class="form-group text-center">
+                        <input type="submit" class="m-4 btn btn-primary login-btn" value="create neighbourhood">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% load bootstrap5 %}
+{% block styles %}
+{{ block.super}}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<br><br><br><br>
+<style>
+    .cont {
+        margin-top: 5%;
+    }
+
+    form {
+        border: 2px solid black;
+        border-radius: 10%;
+        padding: 5%;
+        background: linear-gradient(to top, #f0ea9c, #f05c48);
+        filter: drop-shadow(2px 4px 8px #585858);
+    }
+
+    form:hover {
+        filter: drop-shadow(2px 4px 8px #fff);
+    }
+</style>
+
+
+<div class="container cont ">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8  poster">
+            <h3 class="text-center tt ">Create a new post</h3>
+            <form action="{%url 'create_post'%}" method="post" enctype="multipart/form-data">
+                {%csrf_token%}
+                {% bootstrap_form form%}
+                <input type="submit" class="btn btn-outline-success " value="Create post">
+            </form>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+</div>
+
+{% endblock %}

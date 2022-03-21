@@ -1,0 +1,64 @@
+{% extends "main/base.html" %}
+{% load bootstrap5 %}
+{% block content %}
+
+<br><br><br><br><br>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+    .car {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        text-align: center;
+        margin-top: 5%;
+    }
+
+    .car:hover {
+        filter: drop-shadow(2px 4px 8px rgb(207, 113, 6));
+    }
+
+    .title {
+        color: grey;
+        font-size: 18px;
+    }
+
+
+    button:hover,
+    a:hover {
+        opacity: 0.7;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        {% for posts in post %}
+        <div class="col-md-4">
+
+            <div class="card car">
+                <img src="{{ posts.photo.url }}" alt="post" style="width:100%,">
+                <h4>{{posts.name}}</h4>
+                <p>{{posts.about}}</p>
+                <p>{{posts.hood}}</p>
+                <p>Created on :<strong>{{ posts.date_created|date }}</strong> by <strong>{{posts.user}}</strong></p>
+
+            </div>
+        </div>
+
+        {% empty %}
+        <div class="col-md-12">
+            <div class="card mb-4 post-card">
+                <div class="card-body text-center">
+                    <h4 class="text-danger">No Posts within Your Area!!!</h4>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+
+    </div>
+
+    <div class="text-center mb-3" style="margin-top: 5%;">
+        <a href="{%url 'create_post'  %}" class="btn btn-outline-warning bg-danger text-dark rounded-pill"><span
+                style="font-size: x-large;">Create a Post</span>
+        </a>
+    </div>
+</div>
+
+{%endblock%}

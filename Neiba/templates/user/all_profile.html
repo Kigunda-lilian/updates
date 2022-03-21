@@ -1,0 +1,54 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<br><br><br><br><br>
+<style>
+    .uno {
+        margin-top: 3%;
+        margin-bottom: 3%;
+    }
+
+    .cor {
+        background: linear-gradient(to top, #f0ea9c, #f05c48);
+        filter: drop-shadow(2px 4px 8px #585858);
+    }
+
+    .cor:hover {
+        filter: drop-shadow(2px 4px 8px #fff);
+    }
+</style>
+
+
+<div class="container uno">
+
+    <div class="row">
+        {% for acc in accounts %}
+        <div class="card cor col-md-3 m-3 text-left">
+
+            {% if acc.photo %}
+            <img src="{{acc.photo.url}}" alt="" style="border-radius: 50%; width: 50%; height: auto;">
+            {%else%}
+            <img src="https://cdn.pixabay.com/photo/2012/04/01/18/02/golf-23794__340.png" class="card-img-top"
+                alt="My profile picture">
+            {% endif %}
+            <div class="card-body">
+                <p>Username: {{ acc.user.username }}</p>
+                <p>
+                    {% if profile.bio %}
+                    <small>Bio: {{ acc.bio }}</small>
+                    {% else %}
+                    <span class="text-danger">No about me</span>
+                    {% endif %}
+                </p>
+                <p>Contact: {{ acc.contact }}</p>
+                <p>Location: {{ acc.location }}</p>
+                <p>Hood: {{ acc.hood }}</p>
+                <h6>Joined: <span class="badge rounded-pill bg-secondary text-white">
+                        {{ user.created_on|date }} </span></h6>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock %}

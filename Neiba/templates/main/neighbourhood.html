@@ -1,0 +1,41 @@
+{%extends 'main/base.html'%}
+
+{% block content %}
+<br><br><br><br> <br>
+{{block.super}}
+
+<div class="container hood">
+
+    <div class="row">
+        {% for hoods in hood %}
+        <div class="col-md-4">
+            <div class="card"
+                style="margin-bottom: 5%; padding: 3%; background: linear-gradient(to top, #f0ea9c, #f05c48); ">
+                <a href="{% url 'single_hood' hoods.name %}" class="btn btn-warning btn-sm"><img
+                        src="{{hoods.photo.url}}" alt="" width="100%" class="image"></a>
+
+                <h3 class="name">{{hoods.name}} , {{ hoods.location }}</h3>
+                <p>{{hoods.occupants_count}} Member{{hoods.occupants_count|pluralize}}</p>
+
+                <p>{{ hoods.about }}</p>
+
+                {% if request.user.profile.hood == hoods %}
+                <a href="{% url 'leave_hood' hoods.id %}" class="btn btn-outline-danger btn-sm">Leave at will</a>
+
+                <a href="{%url 'single_hood' hoods.name %}" class="btn btn-outline-success btn-sm"
+                    style="float: right">Explore {{hoods.name}}
+                </a>
+                {% elif not request.user.profile.hood %}
+                <a href="{% url 'single_hood' hoods.name %}" class="btn btn-success btn-sm">Join Hood</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="text-center mb-3">
+        <a href="{%url 'create_neighbourhood'  %}" class="btn btn-outline-white bg-success text-white rounded-pill">
+            Add New Hood
+        </a>
+    </div>
+</div>
+{% endblock %}

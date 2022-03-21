@@ -47,7 +47,7 @@ def update_profile(request, id):
             profile.save()
             return redirect('profile')
 
-    return render(request, 'user/update_prof.html', {"form": form})
+    return render(request, 'user/profile_update.html', {"form": form})
 
 @login_required(login_url="/users/login/")
 def all_profile(request):

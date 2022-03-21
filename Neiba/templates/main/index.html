@@ -1,1 +1,67 @@
-<h1>My home page</h1>
+{%extends 'main/base.html'%}
+
+{% block content %}
+<br><br><br><br> <br><br>
+{{block.super}}
+<style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1592595896551-12b371d546d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fG5laWdoYm9yaG9vZHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60');
+        background-repeat: no-repeat;
+        background-size: cover;
+        opacity:0.7;
+    }
+
+    .mise {
+        margin-left: 10%;
+        margin-right: 30%;
+        margin-bottom: 30%;
+        margin-top: 10%;
+        background: inherit;
+        width: 90%;
+    }
+
+    .mise p {
+        color: black;
+        font-size: x-large;
+        font-family: "Lucida Console", "Courier New", monospace;
+    }
+
+    .mise a {
+        margin-left: 40%;
+        font-size: x-large;
+        padding: 1%;
+        border-radius: 20%;
+    }
+
+    .h1 {
+        color: red;
+        text-align: center;
+    }
+
+    .form {
+        width: 50%;
+        margin-left: 25%;
+        margin-top: 5%;
+    }
+</style>
+
+<div class="container home">
+    <h1 class="h1">Welcome to Neighbourhood</h1>
+
+    <form class="me-auto form search-form " target="_self" action="{% url 'search' %}">
+        <div class="d-flex align-items-center"><label class="form-label d-flex mb-0" for="search-field">
+            </label><input class="form-control search-field" placeholder="Search Neighbourhood...." type="search"
+                id="search-field" name="search_term">
+            <i class="fa fa-search " style="font-size: x-large; color: white; margin-left:2%;"></i>
+        </div>
+    </form>
+
+    <div class=" mise">
+        <p>Find the best neighbourhood to join and get to know whether your business will
+            thrive there!!! <br>
+            Join a Neighbourhood today</p>
+        <a href="{% url 'neighbourhood'  %}" class="btn btn-secondary btn-sm">Join Hood</a>
+    </div>
+
+</div>
+{% endblock %}

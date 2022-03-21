@@ -1,0 +1,40 @@
+{% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
+{% load bootstrap5 %}
+{% block content %}
+<br><br><br><br>
+<!-- content -->
+<style>
+    form {
+        border: 2px solid black;
+        border-radius: 10%;
+        padding: 5%;
+        background: linear-gradient(to top left, #d6a6a3, #f5c88e);
+        filter: drop-shadow(2px 4px 8px #585858);
+    }
+
+    form:hover {
+        filter: drop-shadow(2px 4px 8px #fff);
+    }
+
+    input {
+        font-size: larger;
+    }
+</style>
+<div class="container">
+    <div class=" mt-4">
+        <div class="text-center">
+            <h4>Create A Business</h4>
+        </div>
+        <form action="{% url 'create_business' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <div class="form-group">
+                <input type="submit" class="btn btn-outline-success text-dark btn-sm bg-danger"
+                    value="Create Business" />
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock%}

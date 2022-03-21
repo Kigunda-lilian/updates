@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% load bootstrap5 %}
+{% block content %}
+<br><br><br><br>
+<!-- content -->
+<style>
+    .form {
+        padding-left: 20%;
+        border: 2px solid black;
+        border-radius: 10%;
+        background: linear-gradient(to top, #f0ea9c, #f05c48);
+    }
+</style>
+<div class="container">
+    <div class=" mt-4">
+        <div class="form">
+            <h4 class="text-center">Update profile</h4>
+            <form action="" method="POST" enctype="multipart/form-data">
+                {% load crispy_forms_tags %}
+                {{ form | crispy }}
+                {% csrf_token %}
+                <div class="form-group">
+                    <input type="submit" class="btn btn-outline-warning btn-sm bg-success" value="Update" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock%}
