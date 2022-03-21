@@ -70,7 +70,7 @@ def neighbourhood(request):
     hood = Neighbourhood.objects.all().order_by('-id')
     return render(request, 'main/neighbourhood.html', {'hood': hood, 'current_user': current_user})
 
-@login_required(login_url='/accounts/login/')
+@login_required(login_url='/users/login/')
 def one_hood(request, name):
     current_user = request.user
     hood = Neighbourhood.objects.get(name=name)
@@ -95,3 +95,42 @@ def leave_hood(request, id):
     request.user.profile.hood = None
     request.user.profile.save()
     return redirect('neighbourhood')
+
+@login_required(login_url='/users/login/')
+def create_business(request):
+    current_user = request.user
+    if request.method == "POST":
+
+        form = BusinessForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.user = current_user
+            business.name = request.POST['name']
+            business.save()
+        return HttpResponseRedirect('/busineses')
+    else:
+        form = BusinessForm()
+    return render(request, 'main/create_business.html', {'form': form, 'profile': profile})
+
+@login_required(login_url="/users/login/")
+def busineses(request):
+    current_user = request.user
+    busineses = Business.objects.all().order_by('-id')
+
+    profile = Profile.objects.filter(user_id=current_user.id).first()
+
+    if profile is None:
+        profile = Profile.objects.filter(
+            user_id=current_user.id).first()
+
+        locations = Location.objects.all()
+        hood = Neighbourhood.objects.all()
+
+        busineses = Business.objects.all().order_by('-id')
+
+        return render(request, "user/profile.html", {"danger": "Update Profile", "locations": locations, "hood": hood, "busineses": busineses})
+    else:
+        hood = profile.hood
+        busineses = Business.objects.all().order_by('-id')
+        return render(request, "main/bizna.html", {"busineses": busineses})
