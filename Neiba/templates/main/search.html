@@ -1,0 +1,157 @@
+{% extends "main/base.html" %}
+{% block content %}
+<br><br><br><br><br>
+<style>
+    .image {
+        height: auto;
+        width: 100%;
+    }
+
+    .cent {
+        margin-top: 5%;
+    }
+
+    .side {
+        border: 2px solid black;
+        border-radius: 10%;
+        padding: 5%;
+        background: linear-gradient(to top, #f0ea9c, #f05c48);
+        filter: drop-shadow(2px 4px 8px #585858);
+    }
+
+    .side:hover {
+        filter: drop-shadow(2px 4px 8px #fff);
+    }
+
+    .tab {
+        padding: 5%;
+        background: linear-gradient(to top, #f0ea9c, #f05c48);
+        filter: drop-shadow(2px 4px 8px #585858);
+    }
+
+    .lint {
+        padding: 5%;
+        background: linear-gradient(to top, #f0ea9c, #f05c48);
+        filter: drop-shadow(2px 4px 8px #585858);
+        margin-left: 10%;
+        margin-right: 10%;
+        margin-bottom: 2%;
+    }
+</style>
+
+<div class="container">
+    <h2 class="text-center mb-5">Your search results</h2>
+
+    <div class="row ">
+        {% for hood in neighbourhood %}
+        <div class="container cent">
+            <div class="side">
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="{{hood.photo.url}}" class="image">
+                    </div>
+                    <div class="col-md-6">
+                        <p>Hood: {{hood.name}}</p>
+                        <p>Description: {{hood.about}}</p>
+                        <p>Occupants: {{hood.occupants_count}}</p>
+                        <p>Location: {{ hood.location }}</p>
+                        <p>Date Created: {{ hood.created_on|date }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-center text-warning" style="margin-top: 5%;">Businesses in This Hood</h2>
+            <div class="col-md-12">
+
+                <div class="card m-3 tab">
+                    <table class="table">
+                        <thead>
+                            <tr>
+
+                                <th scope="col">Name</th>
+                                <th scope="col">About</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Location</th>
+                                <th scope="col">Neighborhood</th>
+                                <th scope="col">Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for hood in busineses %}
+                            <tr>
+                                <td class="b-text">
+                                    <h4>{{ hood.name }}</h4>
+                                </td>
+                                <td>{{ hood.about }}</td>
+                                <td>{{ hood.email }}</td>
+                                <td>{{ hood.location }}</td>
+                                <td>
+                                    <span class="">
+                                        {{ hood.hood }}
+                                    </span>
+                                </td>
+                                <td>{{ hood.date_created|date }}</td>
+                                <td>
+                                    <a class="text-danger" href="">
+                                        <i class="fa fa-trash-alt text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center text-danger">No Businesses Created!</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <a href="{%url 'create_business'  %}"
+                        class="btn btn-outline-dark bg-warning text-white rounded-pill ">
+                        Create a Business
+                    </a>
+                </div>
+            </div>
+        </div>
+        <h2 class="text-center text-warning" style="margin-top: 5%;">Posts in This Hood</h2></b>
+        <div class="col-md-12 links">
+            <div class="card lint">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">About</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for post in posts %}
+                        <tr>
+                            <td>{{ post.name }}</td>
+                            <td>{{ post.about }}</td>
+                            <td><span class="badge rounded-pill bg-secondary text-white">
+                                    {{ post.location }}
+                                </span></td>
+                            <td>
+                                <a class="text-danger" href="">
+                                    <i class="fa fa-trash-alt text-danger"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="text-center text-danger">No Posts Created!</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6" style="margin-left: 10%;">
+                <a href="{%url 'create_post'  %}" class="btn btn-outline-dark bg-warning text-white rounded-pill">
+                    Add A Post
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+        {% endblock %}

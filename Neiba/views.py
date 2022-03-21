@@ -31,7 +31,7 @@ def profile(request):
     hood = Neighbourhood.objects.all()
     businesses = Business.objects.filter(user_id=current_user.id)
     posts = Post.objects.filter(user_id=current_user.id)
-    return render(request, "all-temps/profile.html", {"profile": profile, 'hood': hood, 'businesses': businesses, "posts": posts, })
+    return render(request, "user/profile.html", {"profile": profile, 'hood': hood, 'businesses': businesses, "posts": posts, })
 
 
 @login_required(login_url="/users/login/")

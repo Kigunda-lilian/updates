@@ -7,7 +7,7 @@
      <form method ="POST">
          {%csrf_token%}
          <fieldset class ="form-group">
-             <legend class="border-bottom mb-5 pt-3 pb-4 text-center "style="font-family: 'Satisfy', bold; font-size:2rem;'">Instagram</legend>
+             <legend class="border-bottom mb-5 pt-3 pb-4 text-center "style="font-family: 'Satisfy', bold; font-size:2rem;'">NEIGBOURHOOD</legend>
              {{ form|crispy }}
          </fieldset>
          <div class ="form-group">
@@ -16,7 +16,7 @@
     </form>
     <div class ="border-top pt-2">
         <small class="text-muted">
-            Don't have an Account? <a class="ml-2" href="{%url 'register'%}"></strong>Sign Up</strong> </a>Now
+            Don't have an Account? <a class="ml-2" href="/users/register/"></strong>Sign Up</strong> </a>Now
 
         </small>
     <div>

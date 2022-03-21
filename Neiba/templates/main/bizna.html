@@ -1,0 +1,57 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<br><br><br><br><br>
+<style>
+    .can {
+        background: linear-gradient(to top, #f0ea9c, #f05c48);
+        filter: drop-shadow(2px 4px 8px #585858);
+        margin-top: 5%;
+    }
+
+    .can:hover {
+        filter: drop-shadow(2px 4px 8px #fff);
+    }
+</style>
+<section class="blog-section" id="">
+    <div class="container mt-5">
+        <h2 class="text-center headings">Businesses</h2>
+        <div class="row">
+
+            {% for bness in busineses %}
+            <div class="col-md-4">
+                <div class="card can">
+                    <div class="card-body">
+                        <h5 class="card-title text-capitalize"><span style="font-weight: 900;">Name:
+
+                            </span>{{ bness.name }}</h5>
+
+                        <p><span style="font-weight: 900;">Description: </span>{{ bness.about }}</p>
+                        <p><span style="font-weight: 900;">Neighbourhood: </span>{{ bness.hood }}</p>
+                        <p><span style="font-weight: 900;">Location: </span>{{ bness.location }}</p>
+                        <a href="malto:{{ bness.email }}" class="card-link">Email: <span
+                                class="text-bold text-primary">{{ bness.email }}</span> </a>
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+            {% empty %}
+            <div class="col-md-12">
+                <div class="card mb-4 post-card">
+                    <div class="card-body text-center">
+                        <h6 class="fade-item mb-2 text-danger">No busineses found within your Neighbourhood!!</h6>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <div class="text-center mb-3" style="margin-top: 5%;">
+                    <a href="{%url 'create_business'  %}"
+                        class="btn btn-outline-warning bg-danger text-dark rounded-pill"><span
+                            style="font-size: x-large;">Add a Business</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+</section>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/14bff15e69.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+  <title>NEIGBOURHOOD</title>
+</head> 
+<body> 
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top navi " style=" border-bottom : inset ;">
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+      <div class="navbar-nav text-white">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active pl-5 ml-5"  id="name" aria-current="page" href="/">
+              <span style="font-family: 'Satisfy', bold; font-size:2rem;"> Neighbourhood</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    
+  
+    <div class="col-sm-6 col-md-6">
+      {% if user.is_authenticated %}
+  
+      <ul class="navbar-nav nav-right">
+        <li class="nav-item active">
+          <a class="nav-link" href=""><i class="fa fa-home"></i></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/neighbourhood"><i class="bi bi-people-fill">Communities</i></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/busineses/"><i class="bi bi-building"></i>Busineses</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/post/"><i class="bi bi-plus-square"></i>Posts</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/profiles/"><i class="bi bi-person"></i></i>Users</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/logout"><i class="bi bi-box-arrow-right"></i></a>
+        </li>
+        <li class="nav-item active">
+            {% if user.is_authenticated %}
+            <img src="{{user.profile.media.url}}" alt="" style="border-radius: 50%; width: 10%; height: 10%;"> &nbsp;
+            <span class="text-dark">{{user.username|title}}</span>
+            {%else%}
+            <img src="media/photos/avatar.png" class="card-img-top"
+                alt="My profile picture" style="border-radius: 50%; width: 10%; height: 10%;">
+            {% endif %}
+          </li>
+        
+        
+      </ul>
+    </div>
+  
+   
+      {% endif %}
+    </div>
+  
+  </nav>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+</body>
+</html>
+  

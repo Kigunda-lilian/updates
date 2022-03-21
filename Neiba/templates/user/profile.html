@@ -1,0 +1,87 @@
+{% extends "main/base.html" %}
+{% block content %}
+<br><br><br><br>
+<style>
+    .cint {
+        margin-left: 35%;
+    }
+
+    section {
+        overflow: hidden;
+        width: 100%;
+    }
+</style>
+<section>
+    <div class=" container cint">
+        <div class=" mt-0">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card"
+                        style="background: linear-gradient(to top left, #d6a6a3, #f5c88e);filter: drop-shadow(2px 4px 8px #585858);">
+                        {% if profile.profile_photo %}
+                        <img src="{{profile.photo.url}}" alt="" class="card-img-top">
+                        {%else%}
+                        <img src="https://images.unsplash.com/photo-1616113364365-b6013f3dad25?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8bmVpZ2hib3Job29kfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                            class="card-img-top" alt="My profile picture">
+                        {% endif %}
+                        <div class="card-body text-center">
+                            <p><span style="font: weight 900px; font-size:larger;">Username: </span> {{ user.username }}
+                            </p>
+                            <p>
+                                {% if profile.contact %}
+                            <p> <span style="font: weight 900px; font-size:larger;"> Phone Number:
+                                </span>{{profile.contact}}</p>
+                            {% else %}
+                            <span class="badge rounded-pill bg-secondary text-white">No contact</span>
+                            {% endif %}
+                            </p>
+
+                            <p>
+                                {% if profile.location %}
+                            <p> <span style="font: weight 900px; font-size:larger;"> Location:
+                                </span>{{profile.location}}</p>
+                            {% else %}
+                            <span class="badge rounded-pill bg-secondary text-white">No location</span>
+                            {% endif %}
+                            </p>
+
+                            <p>
+                                {% if profile.bio %}
+                            <p><span style="font: weight 900px; font-size:larger;"> Bio: </span>{{ profile.bio }}</p>
+                            {% else %}
+                            <span class="text-danger">No about me</span>
+                            {% endif %}
+                            </p>
+
+                            <p>
+                                {% if profile.hood %}
+                            <p><span style="font: weight 900px; font-size:larger;"> Hood: </span>{{ profile.hood }}</p>
+                            {% else %}
+                            <span class="text-danger">No Hood</span>
+                            {% endif %}
+                            </p>
+                            <p>Joined on: <span class="badge rounded-pill bg-secondary text-white">
+                                    {{ user.created_on|date }} </span></p>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="deets">
+                        <div>
+                          
+                            {% if request.user is user %}
+                            <div>
+                                <a href="{%url 'update_profile' user.id %}"
+                                    style="color: #f4f7f6; background-color:#ad807d ; padding:2%;border-radius:20% 20% 15% 15%;">
+                                    Edit Profile
+                                </a>
+                            </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
