@@ -7,7 +7,7 @@
 <style>
     form {
         border: 2px solid black;
-        border-radius: 10%;
+       
         padding: 5%;
         background: linear-gradient(to top left, #d6a6a3, #f5c88e);
         filter: drop-shadow(2px 4px 8px #585858);
@@ -30,7 +30,7 @@
             {% csrf_token %}
             {% bootstrap_form form %}
             <div class="form-group">
-                <input type="submit" class="btn btn-outline-success text-dark btn-sm bg-danger"
+                <input type="submit" class="btn btn-outline-success text-dark btn-sm bg-info"
                     value="Create Business" />
             </div>
         </form>
