@@ -134,3 +134,41 @@ def busineses(request):
         hood = profile.hood
         busineses = Business.objects.all().order_by('-id')
         return render(request, "main/bizna.html", {"busineses": busineses})
+
+@login_required(login_url="/users/login/")
+def create_post(request):
+    current_user = request.user.id
+    if request.method == "POST":
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            location = Profile.objects.get(user_id=current_user)
+            post.user = current_user
+            post.save()
+
+        return HttpResponseRedirect('/post')
+    else:
+        form = PostForm()
+    return render(request, "main/create_post.html", {'form': form})
+
+
+login_required(login_url="/users/login/")
+def post(request):
+    current_user = request.user
+    profile = Profile.objects.filter(user_id=current_user.id).first()
+    post = Post.objects.all().order_by('-name')
+    if profile is None:
+        profile = Profile.objects.filter(
+            user_id=current_user.id).first()
+        post = Post.objects.all().order_by('-name')
+
+        location = Location.objects.all()
+        hood = Neighbourhood.objects.all()
+
+        busineses = Business.objects.filter(user_id=current_user.id)
+
+        return render(request, "user/profile.html", {"danger": "Update Profile ", "location": location, "hood": hood,  "busineses": busineses, "post": post})
+    else:
+        hood = profile.hood
+        post = Post.objects.all().order_by('-name')
+        return render(request, "main/post.html", {"post": post})
