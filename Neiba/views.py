@@ -50,6 +50,12 @@ def update_profile(request, id):
     return render(request, 'user/update_prof.html', {"form": form})
 
 @login_required(login_url="/users/login/")
+def all_profile(request):
+    current_user = request.user
+    accounts = Profile.objects.all().order_by('-user')
+    return render(request, 'user/all_profile.html', {'accounts': accounts, 'current_user': current_user})
+
+@login_required(login_url="/users/login/")
 def create_neighbourhood(request):
     current_user = request.user
     if request.method == 'POST':
